@@ -1,0 +1,32 @@
+{
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "name": "campaign.dsd - Branded Frame status generator",
+  "short_name": "campaign.dsd",
+  "description": "Create, customize and share beautiful personalized campaign frames and digital greeting status cards.",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#064e3b",
+  "background_color": "#f0fdfa",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

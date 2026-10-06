@@ -1,0 +1,83 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    // Helper functions
+    function isValidId(id) { 
+      return id is string && id.size() <= 128; 
+    }
+    
+    function incoming() { 
+      return request.resource.data; 
+    }
+    
+    function existing() { 
+      return resource.data; 
+    }
+    
+    function isSignedIn() { 
+      return request.auth != null; 
+    }
+    
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (request.auth.token.email == 'dsdjamia@gmail.com' && request.auth.token.email_verified == true);
+    }
+    
+    function isValidEvent(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.title is string && data.title.size() <= 200
+        && data.createdBy is string && data.createdBy.size() <= 128
+        && data.modelId is string && data.modelId.size() <= 50
+        && (data.imageUrl == null || (data.imageUrl is string && data.imageUrl.size() <= 1048576)) // Max 1MB custom image
+        && (data.photoShape == null || (data.photoShape is string && data.photoShape.size() <= 50))
+        && (data.enableName == null || data.enableName is bool)
+        && (data.enablePhoto == null || data.enablePhoto is bool)
+        && (data.creatorEmail == null || (data.creatorEmail is string && data.creatorEmail.size() <= 200))
+        && (data.photoX == null || data.photoX is int || data.photoX is float)
+        && (data.photoY == null || data.photoY is int || data.photoY is float)
+        && (data.photoWidth == null || data.photoWidth is int || data.photoWidth is float)
+        && (data.photoHeight == null || data.photoHeight is int || data.photoHeight is float)
+        && (data.textStartX == null || data.textStartX is int || data.textStartX is float)
+        && (data.textY == null || data.textY is int || data.textY is float)
+        && (data.fontSize == null || data.fontSize is int || data.fontSize is float)
+        && (data.fontFamily == null || data.fontFamily is string)
+        && (data.textColor == null || data.textColor is string)
+        && (data.boxColor == null || data.boxColor is string)
+        && (data.boxPaddingX == null || data.boxPaddingX is int || data.boxPaddingX is float)
+        && (data.boxHeight == null || data.boxHeight is int || data.boxHeight is float)
+        && (data.boxRadius == null || data.boxRadius is int || data.boxRadius is float)
+        && (data.viewCount == null || data.viewCount is int || data.viewCount is float)
+        && (data.generationCount == null || data.generationCount is int || data.generationCount is float);
+    }
+
+    match /events/{eventId} {
+      allow read: if true;
+      
+      allow create: if isSignedIn() 
+        && isValidId(eventId)
+        && isValidEvent(incoming())
+        && (incoming().createdBy == request.auth.uid || isAdmin());
+        
+      allow update: if (
+        // Action 1: Creator/Admin updating the template fully
+        (isSignedIn() && (existing().createdBy == request.auth.uid || isAdmin()) && isValidEvent(incoming()) && incoming().createdBy == existing().createdBy)
+        ||
+        // Action 2: Anyone incrementing counts (viewCount, generationCount)
+        (incoming().diff(existing()).affectedKeys().hasOnly(['viewCount', 'generationCount'])
+         && (incoming().viewCount == existing().viewCount + 1 || incoming().viewCount == existing().viewCount)
+         && (incoming().generationCount == existing().generationCount + 1 || incoming().generationCount == existing().generationCount))
+      );
+      
+      allow delete: if isSignedIn() && (existing().createdBy == request.auth.uid || isAdmin());
+    }
+  }
+}

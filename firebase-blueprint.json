@@ -1,0 +1,43 @@
+{
+  "entities": {
+    "event": {
+      "title": "Poster Template Event",
+      "description": "A customizable poster template with coordinates, predefined model ID or custom background image, photo frames, and input toggles.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "createdBy": { "type": "string" },
+        "creatorEmail": { "type": "string" },
+        "modelId": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "photoX": { "type": "number" },
+        "photoY": { "type": "number" },
+        "photoWidth": { "type": "number" },
+        "photoHeight": { "type": "number" },
+        "photoShape": { "type": "string" },
+        "enableName": { "type": "boolean" },
+        "enablePhoto": { "type": "boolean" },
+        "textStartX": { "type": "number" },
+        "textY": { "type": "number" },
+        "fontSize": { "type": "number" },
+        "fontFamily": { "type": "string" },
+        "textColor": { "type": "string" },
+        "boxColor": { "type": "string" },
+        "boxPaddingX": { "type": "number" },
+        "boxHeight": { "type": "number" },
+        "boxRadius": { "type": "number" },
+        "viewCount": { "type": "number" },
+        "generationCount": { "type": "number" }
+      },
+      "required": ["id", "title", "createdBy", "modelId"]
+    }
+  },
+  "firestore": {
+    "/events/{eventId}": {
+      "schema": "event",
+      "description": "Individual poster template configurations."
+    }
+  }
+}

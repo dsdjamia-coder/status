@@ -1,333 +1,699 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>മിഹ്റജാനുൽ ബിദായ 2026 - നൂറുൽ ഇസ്ലാം ഹയർ സെക്കൻഡറി മദ്‌റസ</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Cropper.css -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
-    <!-- Google Fonts: Noto Sans Malayalam, Noto Kufi Arabic, Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@700&family=Noto+Sans+Malayalam:wght@700;900&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <style>
-        body { 
-            font-family: 'Noto Sans Malayalam', 'Poppins', sans-serif; 
-            background-color: #f3f4f6; 
-        }
-        .canvas-container { 
-            width: 100%;
-            margin: 0 auto;
-            overflow: hidden; 
-            border-radius: 12px; 
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); 
-        }
-        canvas { width: 100%; height: auto; display: block; }
-        .cropper-container { max-height: 50vh; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>campaign.dsd - Personalize Status & Campaigns</title>
+  <!-- PWA Manifest & Meta Tags -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#064e3b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="campaign.dsd">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Cropper.css -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Noto+Sans+Malayalam:wght@700;900&family=Noto+Kufi+Arabic:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; background-color: #f0fdfa; color: #0f172a; }
+    .theme-gradient {
+      background: linear-gradient(135deg, #064e3b 0%, #0f766e 40%, #0284c7 100%);
+    }
+    .theme-card-gradient {
+      background: linear-gradient(180deg, #0d9488 0%, #064e3b 100%);
+    }
+    .theme-footer-gradient {
+      background: #022c22;
+    }
+  </style>
 </head>
-<body class="min-h-screen p-4 md:p-8 flex items-center justify-center">
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-sky-200 selection:text-emerald-950">
 
-    <div class="max-w-4xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
-        
-        <!-- 🌟 Professional Header Section -->
-        <div class="bg-gradient-to-r from-red-900 to-red-700 p-6 md:p-8 text-white text-center">
-            <h1 class="text-2xl md:text-3xl font-black mb-1 drop-shadow-md">നൂറുൽ ഇസ്ലാം ഹയർ സെക്കൻഡറി മദ്‌റസ</h1>
-            <p class="text-sm md:text-base opacity-90 font-medium tracking-wide">ദേവതിയാൽ (Reg. No: 4883)</p>
-            <div class="mt-4 inline-block bg-yellow-400 text-red-900 px-6 py-2 rounded-full font-bold text-lg md:text-xl shadow-lg border-2 border-yellow-300">
-                മിഹ്റജാനുൽ ബിദായ 2026
+  <!-- ========================================================================= -->
+  <!-- 🌐 TOP NAVIGATION -->
+  <!-- ========================================================================= -->
+  <header class="bg-[#064e3b] border-b border-sky-900/30 text-white sticky top-0 z-50 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 py-3.5 flex justify-between items-center">
+      <div id="btnBrandHome" class="flex items-center gap-2.5 cursor-pointer">
+        <div class="bg-white/10 p-2 rounded-xl border border-white/10 shadow-inner">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-sky-300">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.61 3.84a14.98 14.98 0 00-1.61 6.01m11.61-4.36L9.61 14.37m0 0a6 6 0 01-5.84-1.12v-4.8a14.98 14.98 0 005.84 5.92" />
+          </svg>
+        </div>
+        <span class="text-2xl font-black tracking-tight text-white">campaign<span class="text-sky-300">.dsd</span></span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- PWA Install App Button -->
+        <button id="btnPWAInstall" class="hidden bg-sky-400 hover:bg-sky-500 text-teal-950 px-4 py-2 rounded-full text-xs font-black transition flex items-center gap-1.5 shadow-md">
+          <svg class="w-3.5 h-3.5 text-teal-950" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Install App</span>
+        </button>
+
+        <!-- Login Button -->
+        <button id="navLoginBtn" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-5 py-2 rounded-full text-xs font-bold transition flex items-center gap-2">
+          <svg class="w-4 h-4 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7 7z"/></svg>
+          <span>Login</span>
+        </button>
+
+        <!-- User Profile Dropdown when authenticated -->
+        <div id="navProfileMenu" class="relative hidden">
+          <button id="btnProfileToggle" class="w-9 h-9 rounded-full overflow-hidden border-2 border-sky-300 focus:outline-none shadow">
+            <img id="navProfileImg" src="" class="w-full h-full object-cover">
+          </button>
+          <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-3xl shadow-2xl border border-slate-100 py-4 px-4 z-50 text-slate-800 space-y-4">
+            <!-- User Header card -->
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+              <div class="w-12 h-12 rounded-full overflow-hidden border border-emerald-100 shadow-sm">
+                <img id="menuProfileImg" src="" class="w-full h-full object-cover">
+              </div>
+              <div class="truncate flex-1">
+                <span id="menuProfileName" class="font-extrabold text-sm text-slate-900 block truncate">User</span>
+                <span id="menuEmail" class="text-[10px] text-slate-400 block truncate"></span>
+              </div>
             </div>
+
+            <!-- Custom Links/Actions -->
+            <div class="flex flex-col gap-1 text-xs font-bold text-slate-700">
+              <button id="btnNavDashboard" class="w-full text-left py-2 px-3 rounded-xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <span>Admin Dashboard</span>
+              </button>
+              <button id="btnNavNewCampaign" class="w-full text-left py-2 px-3 rounded-xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                <span>Create New Campaign</span>
+              </button>
+              <button id="btnNavPrivacy" class="w-full text-left py-2 px-3 rounded-xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 12 2.944a11.955 12 2.944 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <span>Privacy Policy</span>
+              </button>
+              <button id="btnNavAbout" class="w-full text-left py-2 px-3 rounded-xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>About Us</span>
+              </button>
+            </div>
+
+            <!-- Logout action -->
+            <div class="border-t border-slate-100 pt-3">
+              <button id="btnNavLogout" class="w-full bg-rose-50 hover:bg-rose-100 text-rose-600 font-extrabold text-xs py-2.5 rounded-xl transition flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                <span>Logout Session</span>
+              </button>
+            </div>
+          </div>
         </div>
 
-        <!-- 🛠️ Workspace (Form & Default Preview) -->
-        <div id="workspace" class="flex flex-col md:flex-row w-full">
-            
-            <!-- Form Section -->
-            <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col border-b md:border-b-0 md:border-r border-gray-100 order-1">
-                <div class="mb-6">
-                    <p class="text-gray-600 text-sm font-medium">വിദ്യാർത്ഥിയുടെ അഡ്മിഷൻ പോസ്റ്റർ തയ്യാറാക്കാൻ താഴെ വിവരങ്ങൾ നൽകുക.</p>
-                </div>
+        <!-- Dashboard Link Icon -->
+        <button id="navDashboardLink" class="text-white hover:text-sky-300 p-1 transition" title="Go to Dashboard">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
 
-                <!-- Input Section -->
-                <div id="input-section" class="flex-1 space-y-6">
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">പേര് *</label>
-                        <input type="text" id="studentName" placeholder="മലയാളത്തിലോ ഇംഗ്ലീഷിലോ നൽകുക" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm">
-                    </div>
+  <!-- ========================================================================= -->
+  <!-- 🚀 MAIN VIEW: LANDING PAGE -->
+  <!-- ========================================================================= -->
+  <main id="landingView" class="flex-1">
+    
+    <!-- 1. HERO SECTION -->
+    <section class="theme-gradient text-white px-5 py-16 md:py-24 relative overflow-hidden">
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+        <div class="max-w-xl space-y-6 z-10">
+          <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-[1.1] text-white">
+            Create Stunning <br><span class="text-sky-300">Campaign Status</span>
+          </h1>
+          <p class="text-sm md:text-base text-teal-50/90 leading-relaxed max-w-lg">
+            Empower your community with custom branded posters and digital greeting frames. Generate, download, and share high-resolution social cards immediately.
+          </p>
 
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">ഫോട്ടോ *</label>
-                        <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-blue-50 hover:border-blue-300 transition shadow-sm">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6 text-center px-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mb-2 text-blue-500">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                                </svg>
-                                <p class="text-sm text-gray-600 font-medium">ക്ലിക്ക് ചെയ്ത് ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക</p>
-                            </div>
-                            <input type="file" id="imageInput" accept="image/png, image/jpeg" class="hidden" />
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Crop Section -->
-                <div id="crop-section" class="hidden flex-1 space-y-4">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-sm font-bold text-gray-700">ഫോട്ടോ ക്രമീകരിക്കുക</h3>
-                        <button id="cancelCropBtn" class="text-sm text-red-600 hover:text-red-800 font-medium">റദ്ദാക്കുക</button>
-                    </div>
-                    <div class="cropper-container bg-black rounded-xl overflow-hidden shadow-inner">
-                        <img id="imageToCrop" src="" alt="Crop preview" class="max-w-full">
-                    </div>
-                    <button id="generateBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl transition shadow-lg text-lg">
-                        പോസ്റ്റർ തയ്യാറാക്കുക
-                    </button>
-                </div>
-            </div>
-
-            <!-- Default Preview Section -->
-            <div class="w-full md:w-1/2 bg-gray-50 p-6 md:p-8 flex flex-col items-center justify-center order-2">
-                <h3 class="text-xs uppercase tracking-wider text-gray-400 font-bold mb-4 text-center">പോസ്റ്റർ പ്രിവ്യൂ</h3>
-                <div class="canvas-container bg-white border border-gray-200 max-w-sm">
-                    <img src="template.png" alt="Template Preview" id="templateImg" class="w-full h-auto" onerror="this.src='https://via.placeholder.com/1080x1080.png?text=Template+Not+Found'">
-                </div>
-            </div>
-            
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+            <button id="btnHeroLaunch" class="bg-sky-400 hover:bg-sky-500 text-[#022c22] font-black px-8 py-4 rounded-full text-sm shadow-xl transition-all transform hover:-translate-y-0.5">
+              Launch Campaign Workspace
+            </button>
+            <button id="btnHeroExplore" class="border-2 border-white/40 hover:bg-white/10 text-white font-bold px-6 py-3.5 rounded-full text-sm transition flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+              <span>Explore Templates</span>
+            </button>
+          </div>
         </div>
 
-        <!-- 🎉 Result View (Shown only after generation) -->
-        <div id="result-view" class="hidden flex-col items-center justify-center p-6 md:p-8 w-full bg-gray-50">
-            <h2 class="text-xl font-bold text-gray-800 mb-6">നിങ്ങളുടെ പോസ്റ്റർ തയ്യാറാണ്!</h2>
+        <!-- Custom Launching Rocket SVG - Green/Sky Blue Palette -->
+        <div class="flex flex-col items-center text-center space-y-4 z-10">
+          <svg class="w-56 h-64 text-white opacity-95 drop-shadow-2xl" viewBox="0 0 200 300" fill="none" stroke="currentColor" stroke-width="2.5">
+            <!-- Star elements -->
+            <path d="M30 40 L33 43 L30 46 L27 43 Z" fill="white" stroke="none"/>
+            <path d="M170 80 L172 82 L170 84 L168 82 Z" fill="white" stroke="none"/>
+            <path d="M50 180 L52 182 L50 184 L48 182 Z" fill="white" stroke="none"/>
             
-            <!-- Canvas Container -->
-            <div class="canvas-container bg-white border border-gray-200 mb-8 max-w-md w-full">
-                <canvas id="posterCanvas" width="1080" height="1080"></canvas>
-            </div>
+            <!-- Rocket Main Body -->
+            <path d="M100 40 C115 80, 125 120, 125 160 L75 160 C75 120, 85 80, 100 40 Z" fill="none" stroke="white" stroke-width="2.5"/>
+            
+            <!-- Rocket Window / Port -->
+            <circle cx="100" cy="100" r="16" stroke="white" stroke-width="2.5" fill="rgba(255,255,255,0.1)"/>
+            <circle cx="100" cy="100" r="5" fill="white"/>
+            
+            <!-- Left Fin -->
+            <path d="M75 140 L50 185 L75 180 Z" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+            <!-- Right Fin -->
+            <path d="M125 140 L150 185 L125 180 Z" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+            
+            <!-- Center Thruster -->
+            <rect x="92" y="160" width="16" height="12" rx="2" fill="white" stroke="none"/>
+            
+            <!-- Curved Rocket exhaust flames (Sky Blue) -->
+            <path d="M92 172 C80 200, 85 240, 100 260 C115 240, 120 200, 108 172" stroke="#38bdf8" stroke-width="3" fill="rgba(56,189,248,0.15)" stroke-linejoin="round"/>
+            <path d="M96 172 C90 190, 92 210, 100 225 C108 210, 110 190, 104 172" stroke="#38bdf8" stroke-width="2.5"/>
+          </svg>
+          <div class="text-xs uppercase tracking-widest text-sky-200 font-extrabold">Design | Generate | Share</div>
+          <p class="text-[11px] text-sky-200/80">Tailored completely to your custom campaigns</p>
+        </div>
+      </div>
+    </section>
 
-            <!-- Action Buttons Container -->
-            <div class="w-full max-w-md space-y-3">
-                
-                <!-- Share & Download Buttons (Side by Side) -->
-                <div class="grid grid-cols-2 gap-3">
-                    <button id="downloadBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-4 rounded-xl flex justify-center items-center gap-2 transition shadow-lg text-sm md:text-base">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                        </svg>
-                        ഡൗൺലോഡ്
-                    </button>
-                    
-                    <button id="shareBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-4 rounded-xl flex justify-center items-center gap-2 transition shadow-lg text-sm md:text-base">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
-                        </svg>
-                        ഷെയർ
-                    </button>
-                </div>
-
-                <button id="resetBtn" class="w-full bg-white border-2 border-gray-200 hover:bg-gray-100 text-gray-700 font-bold py-3 px-4 rounded-xl transition shadow-sm mt-3">
-                    പുതിയത് തയ്യാറാക്കുക
-                </button>
-            </div>
+    <!-- 2. EXPLORE LIVE CAMPAIGNS SECTION -->
+    <section id="exploreCampaignsSec" class="max-w-6xl mx-auto px-5 py-16 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="space-y-3">
+          <h2 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">Active Live Campaigns</h2>
+          
+          <!-- Category Filtering Tabs -->
+          <div id="categoryTabsContainer" class="flex flex-wrap items-center gap-2 p-1 bg-slate-100 rounded-2xl w-fit max-w-full overflow-x-auto">
+            <button id="btnFilterAll" class="px-4 py-2 text-xs font-bold rounded-xl bg-emerald-800 text-white shadow-sm transition whitespace-nowrap">All</button>
+            <button id="btnFilterFestival" class="px-4 py-2 text-xs font-bold rounded-xl text-slate-600 hover:text-slate-900 transition whitespace-nowrap">Festival</button>
+            <button id="btnFilterAcademic" class="px-4 py-2 text-xs font-bold rounded-xl text-slate-600 hover:text-slate-900 transition whitespace-nowrap">Academic</button>
+            <button id="btnFilterSports" class="px-4 py-2 text-xs font-bold rounded-xl text-slate-600 hover:text-slate-900 transition whitespace-nowrap">Sports</button>
+          </div>
         </div>
 
+        <!-- Search input bar -->
+        <div class="relative w-full max-w-sm">
+          <input type="text" id="campaignSearchInput" placeholder="Search campaigns by title or tag..." class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-emerald-700 outline-none text-sm font-semibold shadow-sm transition">
+          <div class="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-slate-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Campaigns Showcase Cards -->
+      <div id="campaignsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pt-4">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- 3. TOOLS WE OFFER SECTION -->
+    <section class="theme-card-gradient text-white py-16 px-5">
+      <div class="max-w-5xl mx-auto space-y-6">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tight">Our Services</h2>
+          <p class="text-teal-100 text-xs md:text-sm mt-1">Everything you need to run powerful graphic promotion campaigns — in one location.</p>
+        </div>
+
+        <div class="bg-white/10 border border-white/10 rounded-3xl p-6 backdrop-blur-md flex justify-between items-center">
+          <div class="flex items-center gap-4">
+            <div class="bg-sky-500/20 p-3 rounded-2xl">
+              <svg class="w-6 h-6 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <span class="text-[10px] uppercase font-bold tracking-widest text-sky-300">Campaign Media</span>
+              <h4 class="font-extrabold text-base text-white">Custom Frames & Digital Posters</h4>
+            </div>
+          </div>
+          <span class="bg-white/20 p-2 rounded-full text-sky-300">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. BUILT FOR EVERY CAMPAIGN SECTION -->
+    <section class="max-w-5xl mx-auto px-5 py-16 space-y-8">
+      <h2 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight text-center">
+        Built for Every Campaign
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="bg-white p-7 space-y-3 border border-slate-100 rounded-3xl shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 bg-emerald-50 text-emerald-700 rounded-xl flex items-center justify-center font-black">
+            <svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          </div>
+          <h4 class="font-black text-slate-800 text-base">Arts & Festivities</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">Personalized frames for local arts festivals, sports fests, and cultural milestones.</p>
+        </div>
+
+        <div class="bg-white p-7 space-y-3 border border-slate-100 rounded-3xl shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 bg-emerald-50 text-emerald-700 rounded-xl flex items-center justify-center font-black">
+            <svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+          </div>
+          <h4 class="font-black text-slate-800 text-base">Educational Events</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">Honor students, celebrate academic achievements, or boost admission campaign outreach.</p>
+        </div>
+
+        <div class="bg-white p-7 space-y-3 border border-slate-100 rounded-3xl shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 bg-emerald-50 text-emerald-700 rounded-xl flex items-center justify-center font-black">
+            <svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h4 class="font-black text-slate-800 text-base">Conferences & Celebrations</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">Spread registration invite links, certificates, and greetings easily with branding.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. HOW IT WORKS SECTION -->
+    <section class="theme-card-gradient text-white py-16 px-5">
+      <div class="max-w-4xl mx-auto space-y-10">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight text-center md:text-left">How It Works</h2>
+          <span class="inline-block mt-3 bg-white/20 text-white text-[11px] font-bold px-4 py-1.5 rounded-full border border-white/20">
+            Campaign Workflow
+          </span>
+        </div>
+
+        <!-- 4 Step Vertical Timeline -->
+        <div class="space-y-8 relative pl-4 border-l-2 border-sky-300/40 ml-4">
+          <div class="relative pl-6">
+            <span class="absolute -left-[27px] top-0 w-7 h-7 bg-sky-300 text-slate-950 font-black rounded-full flex items-center justify-center text-xs shadow">1</span>
+            <h4 class="font-extrabold text-base text-white">Create Your Campaign Frame</h4>
+            <p class="text-xs text-teal-100/80 mt-1">Designers customize frame coordinate presets using our live visual customizer workspace sandbox.</p>
+          </div>
+
+          <div class="relative pl-6">
+            <span class="absolute -left-[27px] top-0 w-7 h-7 bg-sky-300 text-slate-950 font-black rounded-full flex items-center justify-center text-xs shadow">2</span>
+            <h4 class="font-extrabold text-base text-white">Share Unique Links</h4>
+            <p class="text-xs text-teal-100/80 mt-1">Instantly copy your unique shareable campaign page link and distribute it to your community audience.</p>
+          </div>
+
+          <div class="relative pl-6">
+            <span class="absolute -left-[27px] top-0 w-7 h-7 bg-sky-300 text-slate-950 font-black rounded-full flex items-center justify-center text-xs shadow">3</span>
+            <h4 class="font-extrabold text-base text-white">Upload & Crop Photos</h4>
+            <p class="text-xs text-teal-100/80 mt-1">Users click the link on mobile/PC, upload their image, crop in 1:1, and input their custom name details.</p>
+          </div>
+
+          <div class="relative pl-6">
+            <span class="absolute -left-[27px] top-0 w-7 h-7 bg-sky-300 text-slate-950 font-black rounded-full flex items-center justify-center text-xs shadow">4</span>
+            <h4 class="font-extrabold text-base text-white">Download High-Res Output</h4>
+            <p class="text-xs text-teal-100/80 mt-1">Generate high-fidelity final status cards to upload onto WhatsApp, Telegram, or Facebook instantly.</p>
+          </div>
+        </div>
+
+        <!-- CTA Card -->
+        <div class="bg-white/10 border border-white/10 rounded-3xl p-8 text-center space-y-4 backdrop-blur-md">
+          <svg class="w-12 h-12 text-sky-300 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+          <p class="text-sm text-teal-100 max-w-md mx-auto font-medium">Create custom interactive campaign frames immediately. Design with absolute freedom, secure database storage, and quick link distribution.</p>
+          <button id="btnLaunchCampaign" class="bg-sky-400 hover:bg-sky-500 text-[#022c22] font-black px-8 py-3.5 rounded-full text-sm shadow-xl transition transform hover:scale-105">
+            Start Your Campaign Now
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FREQUENTLY ASKED QUESTIONS SECTION -->
+    <section class="max-w-4xl mx-auto px-5 py-16 space-y-6">
+      <h2 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
+        Frequently Asked Questions
+      </h2>
+      <div id="faqContainer" class="divide-y divide-slate-100 bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- 7. EDITORIAL & PRIVACY POLICY INFORMATION -->
+    <section class="bg-emerald-50 border-t border-emerald-100 px-5 py-16">
+      <div class="max-w-4xl mx-auto space-y-8 text-slate-700">
+        <div class="space-y-3">
+          <h3 class="text-xl font-black text-slate-800">Our Objective & Purpose</h3>
+          <p class="text-xs md:text-sm leading-relaxed text-slate-600">
+            campaign.dsd provides decentralized, high-fidelity marketing tools for modern community and institutional events. We believe direct student, alumni, or patron participation is the most powerful organic visual reach. We aim to secure, simplify, and scale the status generation process.
+          </p>
+        </div>
+        <div class="space-y-3">
+          <h3 class="text-xl font-black text-slate-800">Privacy Policy & Secure Data Handling</h3>
+          <p class="text-xs md:text-sm leading-relaxed text-slate-600">
+            We hold our users' data privacy in the absolute highest regard. The photos and metadata uploaded into campaign.dsd during the poster generation flow are processed completely in the local browser canvas memory. We do not persist or store the participant photos or names onto any central server. All administrative operations are fully secured using high-grade Firebase authentication.
+          </p>
+        </div>
+        <div class="space-y-3">
+          <h3 class="text-xl font-black text-slate-800">Terms of Use</h3>
+          <p class="text-xs md:text-sm leading-relaxed text-slate-600">
+            This campaign portal is provided entirely free of cost for public welfare, educational madrasa campaigns, and institutional festivals. Users must maintain ethical design guidelines and comply with regional regulations when configuring frames.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- 🎨 GENERATOR VIEW: POSTER MAKER WORKSPACE -->
+  <!-- ========================================================================= -->
+  <section id="generatorView" class="hidden flex-1 max-w-5xl mx-auto w-full px-4 py-8">
+    <div class="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+      <div class="bg-gradient-to-r from-emerald-800 to-sky-900 p-6 text-white flex justify-between items-center">
+        <div>
+          <span id="genBadge" class="bg-sky-400 text-teal-950 text-[10px] font-black uppercase px-3 py-1 rounded-full shadow-sm"></span>
+          <h2 id="genTitle" class="text-xl font-black mt-2">Create Branded Status Poster</h2>
+        </div>
+        <button id="btnBackHome" class="bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-4 py-2 rounded-xl transition">Back to Home</button>
+      </div>
+
+      <div id="genWorkspace" class="grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-8">
+        <!-- Form Controls -->
+        <div class="space-y-6">
+          <div id="formBox" class="space-y-5">
+            <div id="nameInputGroup">
+              <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-1.5">Participant Name</label>
+              <input type="text" id="participantName" placeholder="Supports English, Malayalam & Arabic text" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none font-semibold">
+            </div>
+            <div id="photoInputGroup">
+              <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-1.5">Upload Profile Photo</label>
+              <label class="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-sky-300 rounded-2xl cursor-pointer bg-slate-50 hover:bg-emerald-50 transition">
+                <svg class="w-8 h-8 text-emerald-700 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span class="text-xs font-bold text-slate-600">Select Portrait (JPG / PNG)</span>
+                <input type="file" id="photoInput" accept="image/png, image/jpeg" class="hidden">
+              </label>
+            </div>
+          </div>
+
+          <!-- Cropper container -->
+          <div id="cropBox" class="hidden space-y-3">
+            <div class="flex justify-between items-center text-xs font-bold">
+              <span>Adjust & Crop Your Picture</span>
+              <button id="btnCropCancel" class="text-rose-600 font-extrabold hover:text-rose-700">Cancel</button>
+            </div>
+            <div class="max-h-64 bg-slate-900 rounded-xl overflow-hidden shadow-inner">
+              <img id="cropTargetImg" src="" class="max-w-full">
+            </div>
+          </div>
+
+          <button id="btnCompile" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-4 rounded-xl shadow-lg transition">
+            Generate My Custom Poster
+          </button>
+        </div>
+
+        <!-- Preview canvas -->
+        <div class="flex flex-col items-center justify-center bg-slate-50 rounded-2xl p-4 border border-slate-100">
+          <span class="text-xs font-bold uppercase tracking-widest text-emerald-800 mb-2">Live Graphic Layout Preview</span>
+          <canvas id="staticPreviewCanvas" width="1080" height="1080" class="w-full max-w-sm rounded-xl shadow-md border bg-white"></canvas>
+        </div>
+      </div>
+
+      <!-- Result View -->
+      <div id="genResultView" class="hidden p-8 flex flex-col items-center text-center space-y-6">
+        <h3 class="text-2xl font-black text-slate-800">✨ Your Custom Poster is Ready!</h3>
+        <p class="text-xs text-slate-500 max-w-sm">Tap Download below to save the high-resolution JPEG status card directly onto your device.</p>
+        <canvas id="finalPosterCanvas" width="1080" height="1080" class="w-full max-w-sm rounded-2xl shadow-xl border bg-white"></canvas>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <button id="btnDownload" class="bg-emerald-700 hover:bg-emerald-800 text-white font-black px-6 py-3.5 rounded-xl shadow-md transition flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>Download High-Res JPG</span>
+          </button>
+          <button id="btnSharePoster" class="bg-sky-500 hover:bg-sky-600 text-white font-black px-6 py-3.5 rounded-xl shadow-md transition flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186l5.574 3.125m-5.574-3.125l5.574-3.125m0 0a2.25 2.25 0 100-2.186M12.791 16.5a2.25 2.25 0 110 4.5 2.25 2.25 0 010-4.5z" /></svg>
+            <span>Share Poster</span>
+          </button>
+          <button id="btnBackToCampaigns" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3.5 rounded-xl transition">Back to Campaigns</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 🔑 ADMIN AUTHENTICATION SIGN-IN VIEW -->
+  <!-- ========================================================================= -->
+  <section id="adminAuthView" class="hidden flex-1 max-w-md mx-auto w-full px-4 py-16">
+    <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-8 space-y-6 text-center">
+      <div class="flex justify-center mb-2">
+        <div class="bg-emerald-50 p-4 rounded-full text-emerald-800 border border-emerald-100">
+          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-2xl font-black text-slate-950">Admin Sign-In</h2>
+        <p class="text-xs text-slate-400 mt-1">Authorized access only. Sign up using your Google Account credentials to manage customized community campaigns.</p>
+      </div>
+
+      <div class="border-t pt-6">
+        <button id="btnGoogleLoginCard" class="w-full flex items-center justify-center gap-3 bg-slate-900 hover:bg-slate-800 text-white font-extrabold py-3.5 px-4 rounded-xl shadow-lg transition">
+          <svg class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          <span>Sign In with Google</span>
+        </button>
+      </div>
+
+      <button id="btnBackFromAuth" class="text-xs font-semibold text-slate-500 hover:text-slate-800 transition">Back to home</button>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 📊 ADMIN DASHBOARD VIEW -->
+  <!-- ========================================================================= -->
+  <section id="adminDashboardView" class="hidden flex-1 max-w-5xl mx-auto w-full px-4 py-8 space-y-8">
+    <div class="flex justify-between items-center border-b pb-4">
+      <div>
+        <h2 class="text-2xl font-black text-slate-900">Your Projects</h2>
+        <p class="text-xs text-slate-400">Manage campaign templates, links, and views.</p>
+      </div>
+      <button id="btnNewCampaign" class="bg-sky-400 hover:bg-sky-500 text-teal-950 font-black px-4 py-2.5 rounded-xl text-xs transition">+ Create Campaign</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-    <script>
-        const imageInput = document.getElementById('imageInput');
-        const studentNameInput = document.getElementById('studentName');
-        const inputSection = document.getElementById('input-section');
-        const cropSection = document.getElementById('crop-section');
-        const workspace = document.getElementById('workspace');
-        const resultView = document.getElementById('result-view');
+    <!-- 1. Your Projects row -->
+    <div class="space-y-3">
+      <h3 class="font-black text-xs uppercase tracking-wider text-slate-500">Active Campaign Links</h3>
+      <div id="adminProjectsList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+    </div>
+
+    <!-- 2. Predefined Template Models row -->
+    <div class="space-y-4 pt-6 border-t">
+      <h3 class="font-black text-xs uppercase tracking-wider text-slate-500">Templates</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         
-        const imageToCrop = document.getElementById('imageToCrop');
-        const generateBtn = document.getElementById('generateBtn');
-        const cancelCropBtn = document.getElementById('cancelCropBtn');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const shareBtn = document.getElementById('shareBtn');
-        const resetBtn = document.getElementById('resetBtn');
+        <!-- Custom template trigger -->
+        <div id="btnCustomTemplate" class="bg-white border-2 border-dashed border-sky-400 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:bg-sky-50/30 transition shadow-sm">
+          <div class="aspect-square bg-slate-50 rounded-xl overflow-hidden mb-3 border flex flex-col items-center justify-center p-4 text-center">
+            <svg class="w-8 h-8 text-sky-500 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            <span class="text-[10px] uppercase font-bold text-sky-600">Upload Custom Image</span>
+          </div>
+          <div>
+            <span class="text-xs font-black text-sky-950 block">+ Blank Template</span>
+            <span class="text-[10px] text-sky-700 block mt-0.5">Upload custom PNG cutout graphic</span>
+          </div>
+        </div>
         
-        const canvas = document.getElementById('posterCanvas');
-        const ctx = canvas.getContext('2d');
+        <!-- Predefined template 1 -->
+        <div id="btnPreset1" class="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:border-emerald-300 transition shadow-sm">
+          <div class="aspect-square bg-slate-100 rounded-xl overflow-hidden mb-3 border">
+            <canvas id="dashboard_thumb_model_1" width="300" height="300" class="w-full h-full object-cover"></canvas>
+          </div>
+          <div>
+            <span class="text-xs font-black block text-slate-800">Emerald & Sky Crystal</span>
+            <span class="text-[10px] text-slate-400 block mt-0.5">Predefined Premium Model</span>
+          </div>
+        </div>
 
-        let cropper;
-        let templateImage = new Image();
-        templateImage.src = 'template.png'; 
+        <!-- Predefined template 2 -->
+        <div id="btnPreset2" class="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:border-emerald-300 transition shadow-sm">
+          <div class="aspect-square bg-slate-100 rounded-xl overflow-hidden mb-3 border">
+            <canvas id="dashboard_thumb_model_2" width="300" height="300" class="w-full h-full object-cover"></canvas>
+          </div>
+          <div>
+            <span class="text-xs font-black block text-slate-800">Vibrant Teal & Sky Cyber</span>
+            <span class="text-[10px] text-slate-400 block mt-0.5">Academic & Competition Model</span>
+          </div>
+        </div>
 
-        // =========================================================================
-        // ⚙️ കോൺഫിഗറേഷൻ (Coordinates & Settings)
-        // =========================================================================
-        const PHOTO_X = 480;      
-        const PHOTO_Y = 150;      
-        const PHOTO_WIDTH = 720;  
-        const PHOTO_HEIGHT = 720; 
+        <!-- Predefined template 3 -->
+        <div id="btnPreset3" class="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:border-emerald-300 transition shadow-sm">
+          <div class="aspect-square bg-slate-100 rounded-xl overflow-hidden mb-3 border">
+            <canvas id="dashboard_thumb_model_3" width="300" height="300" class="w-full h-full object-cover"></canvas>
+          </div>
+          <div>
+            <span class="text-xs font-black block text-slate-800">Jade Mint & Sky Breeze</span>
+            <span class="text-[10px] text-slate-400 block mt-0.5">Warm Celebration Model</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // ⚠️ അലൈൻമെൻ്റ് ഇടത്തുനിന്നും തുടങ്ങുന്ന രീതിയിലാക്കി
-        const TEXT_START_X = 60; // ഇടതുവശത്തെ മാർജിൻ
-        const TEXT_Y = 820;        
-        
-        const FONT_SIZE = 48;
-        const FONT_FAMILY = "'Noto Kufi Arabic', 'Noto Sans Malayalam', 'Poppins', sans-serif";
-        const TEXT_COLOR = "#8B0000"; 
+  <!-- ========================================================================= -->
+  <!-- 🎨 ADMIN SANDBOX EDITOR VIEW (Drag, Resize, Shapes) -->
+  <!-- ========================================================================= -->
+  <section id="adminEditorView" class="hidden flex-1 max-w-5xl mx-auto w-full px-4 py-8 space-y-6">
+    <div class="flex justify-between items-center border-b pb-4">
+      <div>
+        <h2 class="text-2xl font-black text-slate-900">Campaign Frame Customizer</h2>
+        <p class="text-xs text-slate-400">Drag or resize coordinates on the canvas.</p>
+      </div>
+      <button id="btnBackFromEditor" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-xl transition">Back</button>
+    </div>
 
-        const BOX_PADDING_X = 40; 
-        const BOX_HEIGHT = 90;    
-        const BOX_COLOR = "rgba(253, 216, 53, 0.75)"; 
-        const BOX_RADIUS = 30;       
-        // =========================================================================
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Settings Form -->
+      <div class="space-y-4 bg-slate-50 p-6 rounded-3xl border border-slate-200">
+        <div>
+          <label class="block text-xs font-black uppercase text-slate-500 mb-1">Campaign Title</label>
+          <input type="text" id="edTitle" value="Musabaqa 2026" class="w-full px-3 py-2 border rounded-xl font-bold outline-none focus:ring-2 focus:ring-emerald-700">
+        </div>
+        <div>
+          <label class="block text-xs font-black uppercase text-slate-500 mb-1">Unique URL ID (Slug)</label>
+          <input type="text" id="edSlug" value="musabaqa-26" class="w-full px-3 py-2 border rounded-xl font-mono text-xs outline-none focus:ring-2 focus:ring-emerald-700">
+        </div>
+        <div>
+          <label class="block text-xs font-black uppercase text-slate-500 mb-1">Template Style</label>
+          <select id="edModelId" class="w-full px-3 py-2 border rounded-xl font-bold outline-none focus:ring-2 focus:ring-emerald-700">
+            <option value="model_1">Emerald & Sky Crystal</option>
+            <option value="model_2">Vibrant Teal & Sky Cyber</option>
+            <option value="model_3">Jade Mint & Sky Breeze</option>
+            <option value="custom">Custom Graphic Upload</option>
+          </select>
+        </div>
+        <div id="edCustomFileGroup" class="hidden">
+          <label class="block text-xs font-black uppercase text-slate-500 mb-1">Custom Graphic Cutout Image (PNG/JPG)</label>
+          <input type="file" id="edCustomFileInput" accept="image/png, image/jpeg" class="w-full text-xs font-bold bg-white p-2 border rounded-xl focus:ring-2 focus:ring-emerald-700">
+        </div>
+        <div>
+          <label class="block text-xs font-black uppercase text-slate-500 mb-1">Photo Frame Shape</label>
+          <select id="edShape" class="w-full px-3 py-2 border rounded-xl font-bold outline-none focus:ring-2 focus:ring-emerald-700">
+            <option value="circle">Circular Frame</option>
+            <option value="square">Square Frame</option>
+            <option value="rounded">Rounded Rectangle</option>
+            <option value="hexagon">Hexagon Frame</option>
+          </select>
+        </div>
 
-        imageInput.addEventListener('change', function (e) {
-            const files = e.target.files;
-            if (files && files.length > 0) {
-                const file = files[0];
-                const reader = new FileReader();
-                reader.onload = function (event) {
-                    imageToCrop.src = event.target.result;
-                    inputSection.classList.add('hidden');
-                    cropSection.classList.remove('hidden');
-                    if (cropper) cropper.destroy();
-                    cropper = new Cropper(imageToCrop, {
-                        aspectRatio: 1, viewMode: 1, dragMode: 'move', background: false
-                    });
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+        <!-- Coordinates sliders -->
+        <input type="hidden" id="edPhotoX" value="290">
+        <input type="hidden" id="edPhotoY" value="180">
+        <input type="hidden" id="edPhotoW" value="500">
+        <input type="hidden" id="edPhotoH" value="500">
+        <input type="hidden" id="edTextX" value="190">
+        <input type="hidden" id="edTextY" value="780">
 
-        cancelCropBtn.addEventListener('click', resetUI);
+        <button id="btnSaveTemplate" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-4 rounded-xl shadow-lg transition">
+          Save Campaign Template
+        </button>
+      </div>
 
-        generateBtn.addEventListener('click', function () {
-            const name = studentNameInput.value.trim();
-            
-            if (!name || !cropper) {
-                alert("ദയവായി വിദ്യാർത്ഥിയുടെ പേരും ഫോട്ടോയും നൽകുക.");
-                return;
-            }
+      <!-- Live Interactive Canvas Sandbox -->
+      <div class="flex flex-col items-center justify-center bg-slate-900 rounded-3xl p-6 text-white text-center shadow-inner">
+        <span class="text-xs uppercase tracking-widest text-sky-400 font-bold mb-3">⚡ Live Drag & Size Sandbox</span>
+        <canvas id="sandboxCanvas" width="1080" height="1080" class="w-full max-w-sm rounded-2xl border border-slate-700 cursor-move bg-white"></canvas>
+        <p class="text-[11px] text-slate-400 mt-3">Click and drag inside photo box to move. Pull bottom-right corner to resize.</p>
+      </div>
+    </div>
+  </section>
 
-            const croppedCanvas = cropper.getCroppedCanvas({
-                width: PHOTO_WIDTH, height: PHOTO_HEIGHT
-            });
-            generateCanvasImage(croppedCanvas, name);
-        });
+  <!-- ========================================================================= -->
+  <!-- 🌑 FOOTER -->
+  <!-- ========================================================================= -->
+  <footer class="theme-footer-gradient text-slate-300 pt-16 pb-8 px-5 border-t border-sky-950/40">
+    <div class="max-w-6xl mx-auto space-y-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Logo & Description -->
+        <div class="space-y-3">
+          <span class="text-2xl font-black text-white">campaign<span class="text-sky-300">.dsd</span></span>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Personalised media outreach campaigns and dynamic status frames. Secure, rapid distribution of personalized social cards.
+          </p>
+        </div>
 
-        function generateCanvasImage(userImageCanvas, name) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        <!-- Products -->
+        <div class="space-y-2.5 text-xs">
+          <h5 class="font-extrabold uppercase tracking-widest text-white text-xs">Features</h5>
+          <p class="hover:text-white cursor-pointer transition">Campaign Frames</p>
+          <p class="hover:text-white cursor-pointer transition">Multilingual Names</p>
+          <p class="hover:text-white cursor-pointer transition">Decentralized Rendering</p>
+        </div>
 
-            // ഫോട്ടോ വരയ്ക്കുന്നു
-            ctx.drawImage(userImageCanvas, PHOTO_X, PHOTO_Y, PHOTO_WIDTH, PHOTO_HEIGHT);
+        <!-- Company -->
+        <div class="space-y-2.5 text-xs">
+          <h5 class="font-extrabold uppercase tracking-widest text-white text-xs">Platform</h5>
+          <p class="hover:text-white cursor-pointer transition">Overview</p>
+          <p class="hover:text-white cursor-pointer transition">Active Campaigns</p>
+          <p class="hover:text-white cursor-pointer transition">Admin Workspace</p>
+        </div>
 
-            // ടെംപ്ലേറ്റ് വരയ്ക്കുന്നു
-            ctx.drawImage(templateImage, 0, 0, canvas.width, canvas.height);
+        <!-- Legal -->
+        <div class="space-y-2.5 text-xs">
+          <h5 class="font-extrabold uppercase tracking-widest text-white text-xs">Legal</h5>
+          <p class="hover:text-white cursor-pointer transition">Privacy Policy</p>
+          <p class="hover:text-white cursor-pointer transition">Terms of Use</p>
+        </div>
+      </div>
 
-            // പേരും ബോക്സും വരയ്ക്കുന്നു (ഇടതുവശത്ത് നിന്ന് തുടങ്ങുന്നു)
-            if (name) {
-                ctx.font = `bold ${FONT_SIZE}px ${FONT_FAMILY}`;
-                ctx.textAlign = "left"; // ⚠️ അലൈൻമെൻ്റ് Left ആക്കി
-                ctx.textBaseline = "middle";
+      <div class="border-t border-white/10 pt-6 flex justify-between items-center text-xs text-slate-500">
+        <span>&copy; 2026 campaign.dsd. All rights reserved.</span>
+        <!-- Floating scroll to top button -->
+        <button id="btnScrollTop" class="w-10 h-10 bg-emerald-700 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-lg transition">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
 
-                const textMetrics = ctx.measureText(name);
-                const textWidth = textMetrics.width;
+  <!-- Toast system wrapper -->
+  <div id="toast" class="fixed bottom-4 right-4 z-50 px-6 py-3.5 rounded-2xl font-black shadow-2xl text-white transform translate-y-10 opacity-0 transition duration-300 pointer-events-none text-xs"></div>
 
-                const boxWidth = textWidth + (BOX_PADDING_X * 2);
-                const boxX = TEXT_START_X - BOX_PADDING_X; // ഇടത്തുനിന്നും ആരംഭിക്കുന്നു
-                const boxY = TEXT_Y - (BOX_HEIGHT / 2);
+  <!-- ========================================================================= -->
+  <!-- 🍔 RIGHT MOBILE DRAWER NAVIGATION -->
+  <!-- ========================================================================= -->
+  <div id="mobileDrawer" class="fixed inset-0 z-50 hidden">
+    <!-- Backdrop overlay -->
+    <div id="btnDrawerBackdrop" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    <!-- Drawer panel -->
+    <div class="absolute right-0 top-0 bottom-0 w-72 bg-[#064e3b] text-white shadow-2xl p-6 flex flex-col justify-between transform translate-x-0 transition-transform duration-300">
+      <div class="space-y-8">
+        <!-- Close & Header -->
+        <div class="flex justify-between items-center border-b border-white/10 pb-4">
+          <span class="text-xl font-black text-white">Navigation</span>
+          <button id="btnDrawerClose" class="p-1 text-white hover:text-sky-300 transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
 
-                drawRoundedRect(ctx, boxX, boxY, boxWidth, BOX_HEIGHT, BOX_RADIUS, BOX_COLOR);
+        <!-- Links -->
+        <nav class="flex flex-col gap-4 text-sm font-bold">
+          <button id="btnDrawerHome" class="w-full text-left py-2 hover:text-sky-300 transition flex items-center gap-3">
+            <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <span>Home</span>
+          </button>
+          <button id="btnDrawerDashboard" class="w-full text-left py-2 hover:text-sky-300 transition flex items-center gap-3">
+            <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+            <span>Admin Dashboard</span>
+          </button>
+          <button id="btnDrawerNewCampaign" class="w-full text-left py-2 hover:text-sky-300 transition flex items-center gap-3">
+            <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create Campaign</span>
+          </button>
+          <button id="btnDrawerPrivacy" class="w-full text-left py-2 hover:text-sky-300 transition flex items-center gap-3">
+            <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 12 2.944a11.955 12 2.944 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            <span>Privacy Policy</span>
+          </button>
+          <button id="btnDrawerAbout" class="w-full text-left py-2 hover:text-sky-300 transition flex items-center gap-3">
+            <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>About Us</span>
+          </button>
+        </nav>
+      </div>
 
-                ctx.fillStyle = TEXT_COLOR;
-                ctx.fillText(name, TEXT_START_X, TEXT_Y);
-            }
+      <div class="border-t border-white/10 pt-4 text-xs text-sky-200">
+        <span>campaign.dsd &copy; 2026</span>
+      </div>
+    </div>
+  </div>
 
-            workspace.classList.add('hidden');
-            resultView.classList.remove('hidden');
-            resultView.classList.add('flex');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function drawRoundedRect(ctx, x, y, width, height, radius, color) {
-            ctx.beginPath();
-            ctx.moveTo(x + radius, y);
-            ctx.lineTo(x + width - radius, y);
-            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-            ctx.lineTo(x + width, y + height - radius);
-            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-            ctx.lineTo(x + radius, y + height);
-            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-            ctx.lineTo(x, y + radius);
-            ctx.quadraticCurveTo(x, y, x + radius, y);
-            ctx.closePath();
-            
-            ctx.shadowColor = "rgba(0, 0, 0, 0.1)";
-            ctx.shadowBlur = 8;
-            ctx.shadowOffsetX = 2;
-            ctx.shadowOffsetY = 4;
-            
-            ctx.fillStyle = color;
-            ctx.fill();
-            
-            ctx.shadowColor = "transparent";
-            ctx.shadowBlur = 0;
-            ctx.shadowOffsetX = 0;
-            ctx.shadowOffsetY = 0;
-        }
-
-        // --- Download Feature ---
-        downloadBtn.addEventListener('click', function () {
-            const link = document.createElement('a');
-            const safeName = studentNameInput.value.trim().replace(/[^a-zA-Z0-9]/g, '_') || 'Student';
-            link.download = `Admission_Poster_${safeName}.jpg`;
-            link.href = canvas.toDataURL('image/jpeg', 0.95);
-            link.click();
-        });
-
-        // --- Share Feature API Integration ---
-        shareBtn.addEventListener('click', async function () {
-            // ക്യാൻവാസിനെ ഒരു Blob ഇമേജ് ആയി മാറ്റുന്നു
-            canvas.toBlob(async function(blob) {
-                const safeName = studentNameInput.value.trim().replace(/[^a-zA-Z0-9]/g, '_') || 'Student';
-                const file = new File([blob], `Status_${safeName}.jpg`, { type: 'image/jpeg' });
-                
-                // ഷെയർ ചെയ്യാനുള്ള ഡാറ്റ തയ്യാറാക്കുന്നു
-                const shareData = {
-                    title: 'Admission Status',
-                    url: 'https://status-nim.vercel.app',
-                    files: [file]
-                };
-
-                // ഫോണിൽ Share ഫീച്ചർ ഉണ്ടോ എന്ന് പരിശോധിക്കുന്നു
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                    try {
-                        await navigator.share(shareData);
-                        console.log('Shared successfully');
-                    } catch (error) {
-                        console.log('Error sharing:', error);
-                    }
-                } else {
-                    // ഷെയർ സപ്പോർട്ട് ഇല്ലാത്ത ഡെസ്ക്ടോപ്പ് ബ്രൗസറുകൾക്കുള്ള മെസ്സേജ്
-                    alert("നിങ്ങളുടെ ബ്രൗസറിൽ നിലവിൽ ഈ ഷെയർ ഫീച്ചർ ലഭ്യമല്ല. ദയവായി ഡൗൺലോഡ് ബട്ടൺ ഉപയോഗിച്ച് പോസ്റ്റർ ഡൗൺലോഡ് ചെയ്ത ശേഷം ഷെയർ ചെയ്യുക.");
-                }
-            }, 'image/jpeg', 0.90);
-        });
-
-        // --- Reset Feature ---
-        resetBtn.addEventListener('click', resetUI);
-
-        function resetUI() {
-            resultView.classList.add('hidden');
-            resultView.classList.remove('flex');
-            workspace.classList.remove('hidden');
-            
-            cropSection.classList.add('hidden');
-            inputSection.classList.remove('hidden');
-            
-            studentNameInput.value = '';
-            imageInput.value = '';
-            if(cropper) cropper.destroy();
-            cropper = null;
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
+  <!-- Main JavaScript App Module -->
+  <script type="module" src="./js/app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 </body>
 </html>
