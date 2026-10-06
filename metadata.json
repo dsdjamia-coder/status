@@ -1,0 +1,8 @@
+{
+  "name": "Mihrajanul Bidaya Poster Generator",
+  "description": "Create custom admission posters for Mihrajanul Bidaya 2026 at Noorul Islam Higher Secondary Madrasa, Devathiyal.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
