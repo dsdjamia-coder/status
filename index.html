@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>മിഹ്റജാനുൽ ബിദായ 2026 - നൂറുൽ ഇസ്ലാം ഹയർ സെക്കൻഡറി മദ്‌റസ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Cropper.css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+    <!-- Google Fonts: Noto Sans Malayalam, Noto Kufi Arabic, Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@700&family=Noto+Sans+Malayalam:wght@700;900&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Noto Sans Malayalam', 'Poppins', sans-serif; 
+            background-color: #f3f4f6; 
+        }
+        .canvas-container { 
+            width: 100%;
+            margin: 0 auto;
+            overflow: hidden; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); 
+        }
+        canvas { width: 100%; height: auto; display: block; }
+        .cropper-container { max-height: 50vh; }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex items-center justify-center">
+
+    <div class="max-w-4xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+        
+        <!-- 🌟 Professional Header Section -->
+        <div class="bg-gradient-to-r from-red-900 to-red-700 p-6 md:p-8 text-white text-center">
+            <h1 class="text-2xl md:text-3xl font-black mb-1 drop-shadow-md">നൂറുൽ ഇസ്ലാം ഹയർ സെക്കൻഡറി മദ്‌റസ</h1>
+            <p class="text-sm md:text-base opacity-90 font-medium tracking-wide">ദേവതിയാൽ (Reg. No: 4883)</p>
+            <div class="mt-4 inline-block bg-yellow-400 text-red-900 px-6 py-2 rounded-full font-bold text-lg md:text-xl shadow-lg border-2 border-yellow-300">
+                മിഹ്റജാനുൽ ബിദായ 2026
+            </div>
+        </div>
+
+        <!-- 🛠️ Workspace (Form & Default Preview) -->
+        <div id="workspace" class="flex flex-col md:flex-row w-full">
+            
+            <!-- Form Section -->
+            <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col border-b md:border-b-0 md:border-r border-gray-100 order-1">
+                <div class="mb-6">
+                    <p class="text-gray-600 text-sm font-medium">വിദ്യാർത്ഥിയുടെ അഡ്മിഷൻ പോസ്റ്റർ തയ്യാറാക്കാൻ താഴെ വിവരങ്ങൾ നൽകുക.</p>
+                </div>
+
+                <!-- Input Section -->
+                <div id="input-section" class="flex-1 space-y-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">പേര് *</label>
+                        <input type="text" id="studentName" placeholder="മലയാളത്തിലോ ഇംഗ്ലീഷിലോ നൽകുക" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">ഫോട്ടോ *</label>
+                        <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-blue-50 hover:border-blue-300 transition shadow-sm">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6 text-center px-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mb-2 text-blue-500">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                </svg>
+                                <p class="text-sm text-gray-600 font-medium">ക്ലിക്ക് ചെയ്ത് ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക</p>
+                            </div>
+                            <input type="file" id="imageInput" accept="image/png, image/jpeg" class="hidden" />
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Crop Section -->
+                <div id="crop-section" class="hidden flex-1 space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-sm font-bold text-gray-700">ഫോട്ടോ ക്രമീകരിക്കുക</h3>
+                        <button id="cancelCropBtn" class="text-sm text-red-600 hover:text-red-800 font-medium">റദ്ദാക്കുക</button>
+                    </div>
+                    <div class="cropper-container bg-black rounded-xl overflow-hidden shadow-inner">
+                        <img id="imageToCrop" src="" alt="Crop preview" class="max-w-full">
+                    </div>
+                    <button id="generateBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl transition shadow-lg text-lg">
+                        പോസ്റ്റർ തയ്യാറാക്കുക
+                    </button>
+                </div>
+            </div>
+
+            <!-- Default Preview Section -->
+            <div class="w-full md:w-1/2 bg-gray-50 p-6 md:p-8 flex flex-col items-center justify-center order-2">
+                <h3 class="text-xs uppercase tracking-wider text-gray-400 font-bold mb-4 text-center">പോസ്റ്റർ പ്രിവ്യൂ</h3>
+                <div class="canvas-container bg-white border border-gray-200 max-w-sm">
+                    <img src="template.png" alt="Template Preview" id="templateImg" class="w-full h-auto" onerror="this.src='https://via.placeholder.com/1080x1080.png?text=Template+Not+Found'">
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- 🎉 Result View (Shown only after generation) -->
+        <div id="result-view" class="hidden flex-col items-center justify-center p-6 md:p-8 w-full bg-gray-50">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">നിങ്ങളുടെ പോസ്റ്റർ തയ്യാറാണ്!</h2>
+            
+            <!-- Canvas Container -->
+            <div class="canvas-container bg-white border border-gray-200 mb-8 max-w-md w-full">
+                <canvas id="posterCanvas" width="1080" height="1080"></canvas>
+            </div>
+
+            <!-- Action Buttons Container -->
+            <div class="w-full max-w-md space-y-3">
+                
+                <!-- Share & Download Buttons (Side by Side) -->
+                <div class="grid grid-cols-2 gap-3">
+                    <button id="downloadBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-4 rounded-xl flex justify-center items-center gap-2 transition shadow-lg text-sm md:text-base">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                        </svg>
+                        ഡൗൺലോഡ്
+                    </button>
+                    
+                    <button id="shareBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-4 rounded-xl flex justify-center items-center gap-2 transition shadow-lg text-sm md:text-base">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+                        </svg>
+                        ഷെയർ
+                    </button>
+                </div>
+
+                <button id="resetBtn" class="w-full bg-white border-2 border-gray-200 hover:bg-gray-100 text-gray-700 font-bold py-3 px-4 rounded-xl transition shadow-sm mt-3">
+                    പുതിയത് തയ്യാറാക്കുക
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const studentNameInput = document.getElementById('studentName');
+        const inputSection = document.getElementById('input-section');
+        const cropSection = document.getElementById('crop-section');
+        const workspace = document.getElementById('workspace');
+        const resultView = document.getElementById('result-view');
+        
+        const imageToCrop = document.getElementById('imageToCrop');
+        const generateBtn = document.getElementById('generateBtn');
+        const cancelCropBtn = document.getElementById('cancelCropBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        
+        const canvas = document.getElementById('posterCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let cropper;
+        let templateImage = new Image();
+        templateImage.src = 'template.png'; 
+
+        // =========================================================================
+        // ⚙️ കോൺഫിഗറേഷൻ (Coordinates & Settings)
+        // =========================================================================
+        const PHOTO_X = 480;      
+        const PHOTO_Y = 150;      
+        const PHOTO_WIDTH = 720;  
+        const PHOTO_HEIGHT = 720; 
+
+        // ⚠️ അലൈൻമെൻ്റ് ഇടത്തുനിന്നും തുടങ്ങുന്ന രീതിയിലാക്കി
+        const TEXT_START_X = 60; // ഇടതുവശത്തെ മാർജിൻ
+        const TEXT_Y = 820;        
+        
+        const FONT_SIZE = 48;
+        const FONT_FAMILY = "'Noto Kufi Arabic', 'Noto Sans Malayalam', 'Poppins', sans-serif";
+        const TEXT_COLOR = "#8B0000"; 
+
+        const BOX_PADDING_X = 40; 
+        const BOX_HEIGHT = 90;    
+        const BOX_COLOR = "rgba(253, 216, 53, 0.75)"; 
+        const BOX_RADIUS = 30;       
+        // =========================================================================
+
+        imageInput.addEventListener('change', function (e) {
+            const files = e.target.files;
+            if (files && files.length > 0) {
+                const file = files[0];
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    imageToCrop.src = event.target.result;
+                    inputSection.classList.add('hidden');
+                    cropSection.classList.remove('hidden');
+                    if (cropper) cropper.destroy();
+                    cropper = new Cropper(imageToCrop, {
+                        aspectRatio: 1, viewMode: 1, dragMode: 'move', background: false
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        cancelCropBtn.addEventListener('click', resetUI);
+
+        generateBtn.addEventListener('click', function () {
+            const name = studentNameInput.value.trim();
+            
+            if (!name || !cropper) {
+                alert("ദയവായി വിദ്യാർത്ഥിയുടെ പേരും ഫോട്ടോയും നൽകുക.");
+                return;
+            }
+
+            const croppedCanvas = cropper.getCroppedCanvas({
+                width: PHOTO_WIDTH, height: PHOTO_HEIGHT
+            });
+            generateCanvasImage(croppedCanvas, name);
+        });
+
+        function generateCanvasImage(userImageCanvas, name) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // ഫോട്ടോ വരയ്ക്കുന്നു
+            ctx.drawImage(userImageCanvas, PHOTO_X, PHOTO_Y, PHOTO_WIDTH, PHOTO_HEIGHT);
+
+            // ടെംപ്ലേറ്റ് വരയ്ക്കുന്നു
+            ctx.drawImage(templateImage, 0, 0, canvas.width, canvas.height);
+
+            // പേരും ബോക്സും വരയ്ക്കുന്നു (ഇടതുവശത്ത് നിന്ന് തുടങ്ങുന്നു)
+            if (name) {
+                ctx.font = `bold ${FONT_SIZE}px ${FONT_FAMILY}`;
+                ctx.textAlign = "left"; // ⚠️ അലൈൻമെൻ്റ് Left ആക്കി
+                ctx.textBaseline = "middle";
+
+                const textMetrics = ctx.measureText(name);
+                const textWidth = textMetrics.width;
+
+                const boxWidth = textWidth + (BOX_PADDING_X * 2);
+                const boxX = TEXT_START_X - BOX_PADDING_X; // ഇടത്തുനിന്നും ആരംഭിക്കുന്നു
+                const boxY = TEXT_Y - (BOX_HEIGHT / 2);
+
+                drawRoundedRect(ctx, boxX, boxY, boxWidth, BOX_HEIGHT, BOX_RADIUS, BOX_COLOR);
+
+                ctx.fillStyle = TEXT_COLOR;
+                ctx.fillText(name, TEXT_START_X, TEXT_Y);
+            }
+
+            workspace.classList.add('hidden');
+            resultView.classList.remove('hidden');
+            resultView.classList.add('flex');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function drawRoundedRect(ctx, x, y, width, height, radius, color) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+            
+            ctx.shadowColor = "rgba(0, 0, 0, 0.1)";
+            ctx.shadowBlur = 8;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 4;
+            
+            ctx.fillStyle = color;
+            ctx.fill();
+            
+            ctx.shadowColor = "transparent";
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+        }
+
+        // --- Download Feature ---
+        downloadBtn.addEventListener('click', function () {
+            const link = document.createElement('a');
+            const safeName = studentNameInput.value.trim().replace(/[^a-zA-Z0-9]/g, '_') || 'Student';
+            link.download = `Admission_Poster_${safeName}.jpg`;
+            link.href = canvas.toDataURL('image/jpeg', 0.95);
+            link.click();
+        });
+
+        // --- Share Feature API Integration ---
+        shareBtn.addEventListener('click', async function () {
+            // ക്യാൻവാസിനെ ഒരു Blob ഇമേജ് ആയി മാറ്റുന്നു
+            canvas.toBlob(async function(blob) {
+                const safeName = studentNameInput.value.trim().replace(/[^a-zA-Z0-9]/g, '_') || 'Student';
+                const file = new File([blob], `Status_${safeName}.jpg`, { type: 'image/jpeg' });
+                
+                // ഷെയർ ചെയ്യാനുള്ള ഡാറ്റ തയ്യാറാക്കുന്നു
+                const shareData = {
+                    title: 'Admission Status',
+                    url: 'https://status-nim.vercel.app',
+                    files: [file]
+                };
+
+                // ഫോണിൽ Share ഫീച്ചർ ഉണ്ടോ എന്ന് പരിശോധിക്കുന്നു
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share(shareData);
+                        console.log('Shared successfully');
+                    } catch (error) {
+                        console.log('Error sharing:', error);
+                    }
+                } else {
+                    // ഷെയർ സപ്പോർട്ട് ഇല്ലാത്ത ഡെസ്ക്ടോപ്പ് ബ്രൗസറുകൾക്കുള്ള മെസ്സേജ്
+                    alert("നിങ്ങളുടെ ബ്രൗസറിൽ നിലവിൽ ഈ ഷെയർ ഫീച്ചർ ലഭ്യമല്ല. ദയവായി ഡൗൺലോഡ് ബട്ടൺ ഉപയോഗിച്ച് പോസ്റ്റർ ഡൗൺലോഡ് ചെയ്ത ശേഷം ഷെയർ ചെയ്യുക.");
+                }
+            }, 'image/jpeg', 0.90);
+        });
+
+        // --- Reset Feature ---
+        resetBtn.addEventListener('click', resetUI);
+
+        function resetUI() {
+            resultView.classList.add('hidden');
+            resultView.classList.remove('flex');
+            workspace.classList.remove('hidden');
+            
+            cropSection.classList.add('hidden');
+            inputSection.classList.remove('hidden');
+            
+            studentNameInput.value = '';
+            imageInput.value = '';
+            if(cropper) cropper.destroy();
+            cropper = null;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
